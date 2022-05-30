@@ -1,0 +1,17 @@
+    <div>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.type.byType%></td>
+        <td><%= product.brand.byBrand %></td>
+        <td><%= product.stock %></td>
+        <td><%= number_to_currency(product.price, unit:'IDR ') %></td>
+
+        <td><%= link_to "Show", product, class:"btn btn-info" %></td>
+        <td><%= link_to "Edit", edit_product_path(product), class:"btn btn-warning" %></td>
+        <td><%= button_to "Delete", product, method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger"%></td>
+        
+      </tr>
+    </div>
+
+
+

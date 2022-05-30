@@ -1,0 +1,34 @@
+<%= render "products/search" %>
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Produk yang ada</span></h2>
+    </div>
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <% @products.each do |product| %>
+
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="card product-item border-0 mb-4">
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <% if product.image_product.attached?%>
+                             <img src="<%= (url_for(product.image_product))%>" class="img-fluid w-100" alt="">
+                        <%else%>
+                            <%= image_tag "logo.png", class:"img-fluid w-100" %>
+                        <%end%>
+                    </div>
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3"><%= product.name %></h6>
+                        <div class="d-flex justify-content-center">
+                        <h6><%= product.price %></h6>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between bg-light border">
+                    <%= link_to "Lihat Selengkapnya", product, class:"btn btn-sm text-dark p-0" %></td>
+
+                    <%= button_to "Add #{product.name} to cart", line_items_path(:product_id => product.id)%>
+                </div>
+            </div>
+        </div>
+            <% end %>
+    </div>
+</div>

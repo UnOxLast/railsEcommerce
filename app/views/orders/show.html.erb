@@ -1,0 +1,13 @@
+          <div class="container">
+            <p>Name: <%= @order.name %></p>
+            <p>Email: <%= @order.email %></p>
+            <p>Line Items: </p>
+            <ul>
+                <% @order.order_items.each do |item| %>
+                    <li><%= item.quantity %> x <%= item.product.name %></li>
+                <% end %>
+            </ul>
+            <% if current_user.try(:admin?) %>
+                <%= link_to "Back to list", orders_path, class:"btn btn-dark" %>
+            <% end %>
+          </div>

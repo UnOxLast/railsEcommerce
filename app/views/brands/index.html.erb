@@ -1,0 +1,30 @@
+<div class="container">
+  <!-- Jika Admin -->
+  <% if current_user.try(:admin?) %>
+
+  <table class="table table-striped table-hover table-bordered">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= link_to "Kembali Ke produk", home_dashboard_path, class:"btn btn-info" %>
+  </div>
+  <h1>MEREK</h1>
+    <thead class="table-dark">
+      <tr>
+        <th>Nama Merek</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <div id="products">
+        <% @brands.each do |brand| %>
+          <%= render brand %>
+        <% end %>
+      </div>
+    </tbody>
+  </table>
+  <%= link_to "Merek Baru", new_brand_path, class:"btn btn-secondary" %>
+</div>
+<!-- Jika bukan admin -->
+<% else %>
+Access Denied
+<%end%>

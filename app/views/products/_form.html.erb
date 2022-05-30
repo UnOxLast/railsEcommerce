@@ -1,0 +1,66 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- form nama produk -->
+  <div class="mb-3 row">
+    <%= form.label :"Nama Produk", for:"nama", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :name, class:"form-control", id:"nama", placeholder:"example : Nokia 3310"%>
+    </div>
+  </div>
+
+  <!-- form tipe produk -->
+  <div class="mb-3 row">
+    <label for="Type" class="col-sm-2 col-form-label">Tipe Produk</label>
+    <div class="col-sm-10">
+        <%= form.collection_select :type_id, Type.all, :id, :byType, {include_blank: "Select something"},{class:"form-control"}%>
+      </div>
+  </div>
+
+  <!-- form merek produk -->
+  <div class="mb-3 row">
+    <label for="Brand" class="col-sm-2 col-form-label">Merek Produk</label>
+    <div class="col-sm-10">
+        <%= form.collection_select :brand_id, Brand.all, :id, :byBrand, {include_blank: "Select something"},{class:"form-control"}%>
+      </div>
+  </div>
+
+  <!-- form qty produk -->
+  <div class="mb-3 row">
+    <%= form.label :qty_product, for:"qty", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :stock, class:"form-control", id:"qty", placeholder:"example : 69"%>
+    </div>
+  </div>
+
+  <!-- form harga produk -->
+  <div class="mb-3 row">
+    <%= form.label :price_product, for:"price", class:"col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :price, class:"form-control", id:"price", placeholder:"example : 69"%>
+    </div>
+  </div>
+  
+  <!-- form foto produk -->
+  <div class="mb-3 row">
+    <label for="formFile" class="col-sm-2 col-form-label">Foto Produk</label>
+    <div class="col-sm-10">
+      <%= form.file_field :image_product, class:"form-control"%>
+    </div>
+  </div>
+
+  <!-- form submit produk -->
+  <div>
+    <%= form.submit class:"btn btn-secondary"%>
+  </div>
+<% end %>

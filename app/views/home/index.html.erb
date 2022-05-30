@@ -1,0 +1,70 @@
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Kategori</span></h2>
+        <div class="container-fluid pt-5">
+            <div class="row px-xl-5 pb-3">
+                <!-- Categories Start -->
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        <p class="text-right">Rekomendasi</p>
+                        <a href="/products?name_search=&type_select=1&brand_select=&commit=search" class="cat-img position-relative overflow-hidden mb-3"> <%= image_tag "logo.png", class:"img-fluid" %> </a>
+                        <h5 class="font-weight-semi-bold m-0">Android</h5>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        <p class="text-right">Rekomendasi</p>
+                        <a href="products?name_search=&type_select=2&brand_select=&commit=search" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="images/logo.png" alt=""> <%= image_tag "logo.png", class:"img-fluid" %> </a>
+                        <h5 class="font-weight-semi-bold m-0">Laptop</h5>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+                        <p class="text-right">Rekomendasi</p>
+                        <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                        <img class="img-fluid" src="images/logo.png" alt="">  <%= image_tag "logo.png", class:"img-fluid" %> </a>
+                        <h5 class="font-weight-semi-bold m-0">IOS</h5>
+                    </div>
+                </div>
+                <!-- Categories End -->
+
+                <!-- Products Start -->
+                <div class="container-fluid pt-5">
+                    <div class="text-center mb-4">
+                        <h2 class="section-title px-5"><%= link_to "Produk yang Populer", products_path, class:"px-2" %></h2>
+                    </div>
+                    <div class="container-fluid pt-5">
+                        <div class="row px-xl-5 pb-3">
+                            <% @products.each do |product| %>
+                            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                                <div class="card product-item border-0 mb-4">
+                                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                        <% if product.image_product.attached?%>
+                                            <img src="<%= (url_for(product.image_product))%>" class="img-fluid w-100" alt="">
+                                        <%else%>
+                                            <%= image_tag "logo.png", class:"img-fluid w-100" %>
+                                        <%end%>
+                                    </div>
+                                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                        <h6 class="text-truncate mb-3"><%= product.name %></h6>
+                                        <div class="d-flex justify-content-center">
+                                        <h6><%= product.price %></h6>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <%= link_to "Lihat Selengkapnya", product, class:"btn btn-outline-info" %></td>
+                                    <div class="action">
+                                    <%= button_to "Tambahkan ke Keranjang", line_items_path(:product_id => product.id), class:"btn btn-outline-info"%>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                            <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

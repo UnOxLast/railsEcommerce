@@ -1,0 +1,49 @@
+
+<nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <%= image_tag "logo.png", width:"30", height:"24", class:"d-inline-block align-text-top"%>
+    <%= link_to "TKB GADGET STORE", root_path, class:"navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="d-inline-flex align-items-center">
+            <%= link_to "FAQs", home_faq_path, class:"nav-link active"%>
+            <span class="text-muted px-2">|</span>
+            <%= link_to "Bantuan", home_help_path, class:"nav-link active"%>
+            <span class="text-muted px-2">|</span>
+            <%= link_to "About", home_about_path, class:"nav-link active"%>
+            <span class="text-muted px-2">|</span>
+            <%= link_to "Produk", products_path, class:"nav-link active"%>
+            <span class="text-muted px-2">|</span>
+            <%= link_to "Keranjang", cart_path(@current_cart), class:"nav-link active"%>
+          </div>
+      </ul>
+      <div class="col-lg-6 text-center text-lg-right">
+        <div class="d-inline-flex align-items-center">
+          <a class="text-light px-2" href=""><i class="fab fa-twitter"></i></a>
+          <a class="text-light px-2" href=""><i class="fab fa-facebook-f"></i></a>
+          <a class="text-light px-2" href=""><i class="fab fa-instagram"></i></a>
+          <a class="text-light pl-2" href=""><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <% if current_user.try(:admin?) %>
+        <%= link_to "Admin", home_dashboard_path, class:"nav-link active"%>
+        <span class="text-muted px-2">|</span>
+      <%end%>
+      <% if user_signed_in?%>
+        <%= button_to "Halo #{current_user.username}", edit_user_registration_path, method: :get, class:"btn btn-outline-light"%>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class:"btn btn-outline-light" %>
+      <% else %>
+        <%= button_to "Sign Up", new_user_registration_path, method: :get, class:"btn btn-outline-light"%>
+        <%= button_to "Sign In", new_user_session_path, method: :get, class:"btn btn-outline-light"%>
+      <%end%>
+      </ul>
+    </div>  
+  </div>
+</nav>
+
+
+

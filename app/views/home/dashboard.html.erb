@@ -1,0 +1,38 @@
+<div class="container">
+  <!-- Jika Admin -->
+  <% if current_user.try(:admin?) %>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= link_to "Tipe", types_path, class:"btn btn-info" %>
+    <%= link_to "Merek", brands_path, class:"btn btn-dark" %>
+    <%= link_to "Order", orders_path, class:"btn btn-dark" %>
+    
+  </div>
+  <%= render "products/search" %>
+
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Nama Produk</th>
+        <th>Tipe Produk</th>
+        <th>Merek Produk</th>
+        <th>Kuantitas</th>
+        <th>Harga</th>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <div id="products">
+        <% @products.each do |product| %>
+          <%= render product %>
+        <% end %>
+      </div>
+    </tbody>
+  </table>
+  <%= link_to "Produk Baru", new_product_path, class:"btn btn-secondary" %>
+</div>
+<!-- Jika bukan admin -->
+<% else %>
+Access Denied
+<%end%>

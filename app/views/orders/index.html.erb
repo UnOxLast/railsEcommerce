@@ -1,0 +1,53 @@
+<div class="container">
+  <!-- Jika Admin -->
+  <% if current_user.try(:admin?) %>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <%= link_to "Tipe", types_path, class:"btn btn-info" %>
+    <%= link_to "Merek", brands_path, class:"btn btn-dark" %>
+    <%= link_to "Dashboard", home_dashboard_path, class:"btn btn-dark" %>
+    
+  </div>
+
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Nama User</th>
+        <th>Email</th>
+        <th>Alamat</th>
+        <th>Produk</th>
+        <th></th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div id="products">
+        <% @orders.each do |order| %>
+          <div>
+            <tr>
+              <td><%= order.name %></td>
+              <td><%= order.email %></td> 
+              <td><%= order.address %></td> 
+            <td><% order.order_items.each do |item| %>
+              <%= item.quantity %>x
+              <%= item.product.name %>
+              <br/>
+            <% end %></td>
+            <td><%= link_to "Show", order, class:"btn btn-info" %></td>
+
+            <% if order.confirmed == true %>
+            <td><%= button_to "Done", order, method: :delete, confirm: "Are you sure?", class:"btn btn-danger"%></td>
+            <%else%>
+            <%= hidden_field :confirmed, :value=> true %>
+            <td><%= button_to "Confirm", toggle_confirm_path(order), :remote => true, class:"btn btn-info" %></td>
+            <%end%>
+            </tr>
+          </div>
+        <% end %>
+      </div>
+    </tbody>
+  </table>
+</div>
+<!-- Jika bukan admin -->
+<% else %>
+Access Denied
+<%end%>

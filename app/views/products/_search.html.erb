@@ -1,0 +1,23 @@
+<!-- search -->
+<% if request.path == products_path%>
+  <nav class="navbar sticky-top navbar-light bg-light">
+<% else %>
+  <nav class="navbar navbar-light bg-light">
+<% end %>
+  <div class="container-fluid">
+    <a class="navbar-brand"><h1>Produk</h1></a>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="text-dark" >Filter
+          <%= form_tag products_path, method: :get do %>
+            <%= text_field_tag "name_search", params[:name_search] %>
+            <%= select_tag "type_select", options_from_collection_for_select(Type.all, 'id', 'byType'), {prompt: "Select something"}%>
+            <%= select_tag "brand_select", options_from_collection_for_select(Brand.all, 'id', 'byBrand'), {prompt: "Select something"}%>
+            <%= submit_tag "search" %>
+          <% end %>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

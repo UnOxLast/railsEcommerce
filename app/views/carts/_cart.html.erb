@@ -1,0 +1,30 @@
+<div class="row">
+  <% @cart.line_items.each do |line_item| %>
+  <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+      <% if line_item.product.image_product.attached?%>
+        <img src="<%= (url_for(line_item.product.image_product))%>" class="w-100" width="300" height="300" alt="">
+      <%else%>
+        <%= image_tag "logo.png", class:"w-100" %>
+      <%end%>
+      <a href="#!"><div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div></a>                    
+    </div>
+  </div>
+  <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+    <p><strong><%= line_item.product.name %></strong></p>
+    <p>Harga: <%= number_to_currency(line_item.product.price, unit:'IDR ') %></p>
+    <p>Kuantitas: <%= line_item.quantity %></p>
+    <%= button_to "Remove item", line_item_path(line_item), method: :delete, class:"btn btn-danger btn-sm me-1 mb-2" %>
+  </div>
+  <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+    <div class="d-flex mb-4" style="max-width: 200px">
+    <%= button_to "-", line_item_reduce_path(:id => line_item), method: :post, class:"btn btn-primary px-3 me-2" %>
+    <span class="text-muted px-2">|</span>
+    <p><%= line_item.quantity %></p>
+    <span class="text-muted px-2">|</span>
+    <%= button_to "+", line_item_add_path(:id => line_item), method: :post, class:"btn btn-primary px-3 me-2" %>
+    </div>
+    <p class="text-start text-md-center"><strong>Total: <%= number_to_currency(line_item.total_price, unit:'IDR ') %></strong></p>
+  </div>
+  <% end %>
+</div>
